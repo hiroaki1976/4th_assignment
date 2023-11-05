@@ -2,21 +2,13 @@ let arr = [];
 // Save クリックイベント
 $("#save").on("click", function () {
     arr = localStorage.getItem("json");// keyネーム’json’のデータを取得し、変数arrに代入する
-    console.log(arr,'JSON文字列');
     let date = new Date()
-    console.log(date);
     let year = date.getFullYear();
-    console.log(year, '西暦');
     let month = date.getMonth();
-    console.log(month+1, '月');
     let day = date.getDate();
-    console.log(day, '日');
     let hour = date.getHours();
-    console.log(hour, '時');
     let minute = date.getMinutes();
-    console.log(minute, '分');
     let second = date.getSeconds();
-    console.log(second, '秒');
 
     if (arr == null) {// 変数arrがnullなら
         arr = [];// arrに空の配列を代入する
