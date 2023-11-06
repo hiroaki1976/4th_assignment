@@ -1,4 +1,6 @@
 let arr = [];
+
+
 // Save クリックイベント
 $("#save").on("click", function () {
     arr = localStorage.getItem("json");// keyネーム’json’のデータを取得し、変数arrに代入する
@@ -51,10 +53,10 @@ $("#list").on("click", ".display", function () {// デリゲートを使用し�
     console.log(listItem, 'li要素');
     console.log(title, '表示タイトル');
     console.log(value, '表示本文');
-    // 取得したタイトルとメモをフォームに設定
-    $('#title').val(title);
-    $('#text').val(value);
+    $('#title').val(title);// 取得したタイトルをフォームに設定
+    $('#text').val(value);// 取得したメモをフォームに設定
 });
+
 
 // 個別メモ削除クリックイベント
 $('#list').on('click', '.delete', function () {
@@ -78,16 +80,14 @@ $('#list').on('click', '.delete', function () {
 });
 
 
+// clearクリックイベント
+$("#clear").on("click", function () {
+    $('#title').val('');
+    $('#text').val('');
+});
 
 
-  //2.clear クリックイベント
-  $("#clear").on("click", function () {
-    localStorage.clear();
-    $("#list").empty();
-  });
-
-
-  // ページ読み込み：保存データ取得表示
+// ページ読み込み、保存データ取得表示
   const k = JSON.parse(localStorage.getItem('json')).length;   //localstorage内に保存した配列の中にあるオブジェクトの個数を確認
 
   for (let i = 0; i < k; i++) {   //オブジェクトの個数分繰り返す
@@ -121,3 +121,10 @@ $('#list').on('click', '.delete', function () {
     `;
     $("#list").append(html);
     }
+
+
+// 全て削除クリックイベント
+    $("#deleteAll").on("click", function () {
+        localStorage.clear();
+        $("#list").empty();
+    });
