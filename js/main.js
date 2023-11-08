@@ -1,14 +1,17 @@
 let arr = [];
 
-//
+
+// データが無い時はh2とdeleteAllボタンを表示しない
 $(window).on('load',function() {
-    arr = localStorage.getItem("json");
-    arr = JSON.parse(arr);
+    arr = localStorage.getItem("json");// keyネーム’json’のデータを取得し、変数arrに代入する
+    arr = JSON.parse(arr);//arrのJSON文字列をオブジェクトに変換し、arrに代入する
 	if (arr === null) {
         $('h2').css('display', 'none');
         $('#deleteAll').css('display', 'none');
     }
 });
+
+
 // Save クリックイベント
 $("#save").on("click", function () {
     arr = localStorage.getItem("json");// keyネーム’json’のデータを取得し、変数arrに代入する
@@ -88,9 +91,7 @@ $('#list').on('click', '.delete', function () {
             break; // 削除したらループを抜ける
         }
     }
-    console.log(storedData,'storedDataの値');
     if (storedData.length === 0) {
-        console.log(storedData,'storedDataの値2');
         $('h2').css('display', 'none');
         $('#deleteAll').css('display', 'none');
     }
@@ -121,7 +122,6 @@ $("#clear").on("click", function () {
     let minute = arr[i].minute;
     let second = arr[i].second;
     
-       
     const html = `
     <li>
         <p>${year}年${month}月${day}日${hour}時${minute}分${second}秒</p>
@@ -149,12 +149,14 @@ $("#clear").on("click", function () {
         $('#deleteAll').css('display', 'none');
     });
 
+
 // タイトルをクリップボードにコピー
     $('#title').on('click', function () {
         let copyTitle = $('#title')[0].value;// タイトルの文字を取得
         console.log(copyTitle);
         navigator.clipboard.writeText(copyTitle);// クリップボードにコピー
 });
+
 
 // 本文をクリップボードにコピー
     $('#text').on('click', function () {
