@@ -128,3 +128,17 @@ $("#clear").on("click", function () {
         localStorage.clear();
         $("#list").empty();
     });
+
+// タイトルをクリップボードにコピー
+    $('#title').on('click', function () {
+        let copyTitle = $('#title')[0].value;// タイトルの文字を取得
+        console.log(copyTitle);
+        navigator.clipboard.writeText(copyTitle);// クリップボードにコピー
+});
+
+// 本文をクリップボードにコピー
+    $('#text').on('click', function () {
+        let copyText = $('#text')[0].value;// 本文の文字を取得
+        console.log(copyText);
+        navigator.clipboard.writeText(copyText);// クリップボードにコピー
+});
