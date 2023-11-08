@@ -1,6 +1,14 @@
 let arr = [];
 
-
+//
+$(window).on('load',function() {
+    arr = localStorage.getItem("json");
+    arr = JSON.parse(arr);
+	if (arr === null) {
+        $('h2').css('display', 'none');
+        $('#deleteAll').css('display', 'none');
+    }
+});
 // Save クリックイベント
 $("#save").on("click", function () {
     arr = localStorage.getItem("json");// keyネーム’json’のデータを取得し、変数arrに代入する
@@ -40,6 +48,10 @@ $("#save").on("click", function () {
     </li>
     `;
     $("#list").prepend(html);
+    if (arr !== null) {
+        $('h2').css('display', 'block');
+        $('#deleteAll').css('display', 'inline-block');
+    }
     $('#title').val('');
     $('#text').val('');
     });
@@ -75,6 +87,12 @@ $('#list').on('click', '.delete', function () {
             storedData.splice(i, 1); // 対応するメモを削除
             break; // 削除したらループを抜ける
         }
+    }
+    console.log(storedData,'storedDataの値');
+    if (storedData.length === 0) {
+        console.log(storedData,'storedDataの値2');
+        $('h2').css('display', 'none');
+        $('#deleteAll').css('display', 'none');
     }
     localStorage.setItem('json', JSON.stringify(storedData));// 更新されたデータをローカルストレージに保存
 });
@@ -127,6 +145,8 @@ $("#clear").on("click", function () {
     $("#deleteAll").on("click", function () {
         localStorage.clear();
         $("#list").empty();
+        $('h2').css('display', 'none');
+        $('#deleteAll').css('display', 'none');
     });
 
 // タイトルをクリップボードにコピー
