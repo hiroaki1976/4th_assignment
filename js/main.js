@@ -4,7 +4,7 @@ let arr = [];
 // データが無い時はh2とdeleteAllボタンを表示しない
 $(window).on('load',function() {
     arr = localStorage.getItem("json");// keyネーム’json’のデータを取得し、変数arrに代入する
-    arr = JSON.parse(arr);//arrのJSON文字列をオブジェクトに変換し、arrに代入する
+    arr = JSON.parse(arr);// arrのJSON文字列をオブジェクトに変換し、arrに代入する
 	if (arr === null) {
         $('h2').css('display', 'none');
         $('#deleteAll').css('display', 'none');
@@ -28,7 +28,6 @@ $("#save").on("click", function () {
     } else {
         arr = JSON.parse(arr);//arrのJSON文字列をオブジェクトに変換し、arrに代入する
     }
-    console.log(arr,'オブジェクト')
 
     const title = $("#title").val();// id:titleの値を取得し、titleに代入する
     const value = $("#text").val();// id:textの値を取得し、valueに代入する
@@ -65,9 +64,6 @@ $("#list").on("click", ".display", function () {// デリゲートを使用し�
     const listItem = $(this).closest("li"); // クリックされたボタンに最も近い親 <li> 要素を取得
     const title = listItem.find("p:nth-child(2)").text(); // <li> の 2番目の <p> 要素のテキストを取得
     const value = listItem.find("p:nth-child(3)").text(); // <li> の 3番目の <p> 要素のテキストを取得
-    console.log(listItem, 'li要素');
-    console.log(title, '表示タイトル');
-    console.log(value, '表示本文');
     $('#title').val(title);// 取得したタイトルをフォームに設定
     $('#text').val(value);// 取得したメモをフォームに設定
 });
@@ -106,10 +102,10 @@ $("#clear").on("click", function () {
 });
 
 
-// ページ読み込み、保存データ取得表示
-  const k = JSON.parse(localStorage.getItem('json')).length;   //localstorage内に保存した配列の中にあるオブジェクトの個数を確認
-
-  for (let i = 0; i < k; i++) {   //オブジェクトの個数分繰り返す
+// ページ読み込み、保存データ取得表示  
+    const j = JSON.parse(localStorage.getItem('json')) || [];// localStorage.getItem('json')の結果が null でないことを確認してから JSON.parse を行う
+    const k = j.length;// localStorage内に保存した配列の中にあるオブジェクトの個数を確認
+  for (let i = 0; i < k; i++) {   // オブジェクトの個数分繰り返す
     const key = localStorage.key(0);
     let arr = localStorage.getItem(key);
     arr = JSON.parse(arr);
@@ -151,7 +147,7 @@ $("#clear").on("click", function () {
 
 
 // タイトルをクリップボードにコピー
-    $('#title').on('click', function () {
+    $('#title').on('dblclick', function () {
         let copyTitle = $('#title')[0].value;// タイトルの文字を取得
         console.log(copyTitle);
         navigator.clipboard.writeText(copyTitle);// クリップボードにコピー
@@ -159,7 +155,7 @@ $("#clear").on("click", function () {
 
 
 // 本文をクリップボードにコピー
-    $('#text').on('click', function () {
+    $('#text').on('dblclick', function () {
         let copyText = $('#text')[0].value;// 本文の文字を取得
         console.log(copyText);
         navigator.clipboard.writeText(copyText);// クリップボードにコピー
