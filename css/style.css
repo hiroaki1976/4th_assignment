@@ -85,7 +85,7 @@ textarea {
     margin-bottom: 20px
 }
 
-一定の文字数以上を省略する
+/* 一定の文字数以上を省略する */
 #list li p {
     overflow: hidden;
     text-overflow: ellipsis;
